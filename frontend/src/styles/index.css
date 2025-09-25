@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+
+h1{
+    font-size: 128px;
+}
+
+h2{
+    font-size: 64px;
+}
+
+.std-box{
+    border-radius: 10px;
+    border: solid 1px #DDDDDD;
+}
+
+html{
+    height: 100%;
+}
+
+body, #root{
+    height: 100%;
+    width: 100%;
+}
+

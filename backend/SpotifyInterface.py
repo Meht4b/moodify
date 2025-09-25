@@ -85,13 +85,22 @@ class SpotifyInterface:
         return songs
  
     def get_genres(self, prompt):
-        prompt = f"select 5 genres from this list {all_genres} that matches the following theme: '{prompt}',give it as a comma separated list, make sure the whole word is finished."
-        response = self.geminiClient.models.generate_content(model="gemini-1.5-flash", contents=prompt)
-
-        genre_list = response.text
         
-        genres = [genre.strip().lower() for genre in genre_list.split(',')]
-        return genres
+        genres_text = ", ".join(all_genres)
+
+        text = f"""
+        You are a music assistant. 
+        From the following list of genres:
+        {genres_text}
+
+        Select exactly 5 genres that best match this mood: "{prompt}"
+
+        Output only a valid JSON array of genres, for example:
+        ["acoustic", "lo-fi", "folk", "indie", "singer-songwriter"]
+        """
+        response = self.geminiClient.models.generate_content(model="gemini-1.5-flash", contents=text)
+        return response.text
+
     
     def get_intro_playlist(self,genre):
         
@@ -133,7 +142,5 @@ class SpotifyInterface:
             print(i)
 
 a = SpotifyInterface()
-print(a.get_genres("riding a bike while chasing the sunset while feeling really peaceful and calm give me some vocals but make sure its not too acoustic and more on the idie side"))
+print(a.get_genres("working"))
 
-for i in a.get_genres("riding a bike while chasing the sunset while feeling really peaceful and calm give me some vocals"):
-    print(genreScraper.get_intro_playlist(i))
