@@ -4,7 +4,7 @@ from google import genai
 from spotipy.oauth2 import SpotifyOAuth
 import os
 from dotenv import load_dotenv
-from genreScraper import get_genre_div_texts
+from genreScraper import genres
 
 load_dotenv()
 class SpotifyInterface:
@@ -80,14 +80,24 @@ class SpotifyInterface:
         return songs
  
     def get_genres(self, prompt):
-        prompt = f"Generate a list of 5 music genres based on the following theme: {prompt}. Format the response as a comma-separated list."
+        prompt = f"select 5 genres from this list {genres} that matches the following theme: {prompt}. Format the response as a comma-separated list."
         response = self.geminiClient.models.generate_content(model="gemini-1.5-flash", contents=prompt)
 
         genre_list = response.text
-        genres = [genre.strip() for genre in genre_list.split(',')]
+        
+        genres = [genre.strip().lower() for genre in genre_list.split(',')]
         return genres
+    
+    def get_intro_playlist(self,genre):
+        
+        playlist_name = "Intro To "+genre.title()
 
+        # Search for a public playlist named playlist_name created by 'particle detector'
+        results = self.sp.search(q=f'playlist:{playlist_name}', type='playlist', limit=10)
+        playlist = results['playlists']['items'][0]
+        return playlist
+
+    def create_playlist_    
 
 
 a = SpotifyInterface()
-print(a.get_genres("some tracks for riding at night"))

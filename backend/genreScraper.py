@@ -12,4 +12,6 @@ def get_genre_div_texts(url="https://everynoise.com/"):
     genres = [t.strip()[:-2] for t in texts]
 
     return genres
+
+genres = get_genre_div_texts()
     
