@@ -5,13 +5,13 @@ const LandingPage = () => {
   return (
     <>  
     <div className='landing-page-container'>
-            <div className="landing-page-content-container">
+        <div className="landing-page-content-container">
             <div className='landing-page-content std-box'>
                 <h1>
-                    Moodify.
+                    Create the perfect playlist in seconds 
                 </h1>
                 <h3>
-                    Create the perfect playlist for your mood.
+                    Use ai to create perfect playlists for your specific mood in just a few seconds
                 </h3>
             </div>
         </div>
@@ -19,7 +19,10 @@ const LandingPage = () => {
         <div className="landing-page-cta std-box">
             <button className='std-box'><h2>Get Started</h2></button>
         </div>
-
+        <div className='landing-page-grid'></div>
+        <div className='landing-page-grid-mask'></div>
+        <div className="landing-page-red-box extra-box std-box"></div>
+        <div className="landing-page-purple-box extra-box std-box"></div>
     </div>
     </>
      )

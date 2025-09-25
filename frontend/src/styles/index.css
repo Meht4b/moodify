@@ -6,11 +6,11 @@
 }
 
 h1{
-    font-size: 128px;
+    font-size: clamp(30px,5vw,64px);
 }
 
 h2{
-    font-size: 64px;
+    font-size: clamp(30px,5vw,64px);
 }
 
 .std-box{

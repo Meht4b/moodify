@@ -1,0 +1,16 @@
+.header-container h1{
+    font-size: 20px;
+}
+
+.header-container{
+    width: 100%;
+    height: 60px;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    border-bottom: solid 1px #DDDDDD;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+}
