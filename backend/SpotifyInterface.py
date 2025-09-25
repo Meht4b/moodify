@@ -133,4 +133,7 @@ class SpotifyInterface:
             print(i)
 
 a = SpotifyInterface()
-a.create_playlist("chill summer vibes")
+print(a.get_genres("riding a bike while chasing the sunset while feeling really peaceful and calm give me some vocals but make sure its not too acoustic and more on the idie side"))
+
+for i in a.get_genres("riding a bike while chasing the sunset while feeling really peaceful and calm give me some vocals"):
+    print(genreScraper.get_intro_playlist(i))
