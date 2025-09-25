@@ -4,7 +4,10 @@ from google import genai
 from spotipy.oauth2 import SpotifyOAuth
 import os
 from dotenv import load_dotenv
-from genreScraper import genres
+import genreScraper
+
+all_genres = genreScraper.genres
+
 
 load_dotenv()
 class SpotifyInterface:
@@ -32,6 +35,8 @@ class SpotifyInterface:
             try:
                 results = self.sp.search(q=song, type='track', limit=1)
                 if results['tracks']['items']:
+                    print(results['tracks']['items'][0])
+                    return
                     track_id = results['tracks']['items'][0]['id']
                     seed_track_ids.append(track_id)
             except Exception as e:
@@ -80,7 +85,7 @@ class SpotifyInterface:
         return songs
  
     def get_genres(self, prompt):
-        prompt = f"select 5 genres from this list {genres} that matches the following theme: {prompt}. Format the response as a comma-separated list."
+        prompt = f"select 5 genres from this list {all_genres} that matches the following theme: '{prompt}',give it as a comma separated list, make sure the whole word is finished."
         response = self.geminiClient.models.generate_content(model="gemini-1.5-flash", contents=prompt)
 
         genre_list = response.text
@@ -90,14 +95,42 @@ class SpotifyInterface:
     
     def get_intro_playlist(self,genre):
         
-        playlist_name = "Intro To "+genre.title()
-
+        playlist_name = "the sound of " +genre.title()
+        print("Searching for playlist:", playlist_name)
         # Search for a public playlist named playlist_name created by 'particle detector'
-        results = self.sp.search(q=f'playlist:{playlist_name}', type='playlist', limit=10)
+        results = self.sp.search(q=f'playlist:{playlist_name}', type='playlist', limit=20)
+        print(results["playlists"]['items'])
+        for i in results["playlists"]['items']:
+            if i:
+                if i['owner']['id'] == 'thesoundsofspotify':
+                    print("Found playlist:", i['name'], i['external_urls']['spotify'])
+                
+        return
+
         playlist = results['playlists']['items'][0]
+        print("Found playlist:", playlist['name'], playlist['external_urls']['spotify'])
         return playlist
 
-    def create_playlist_    
+    def create_playlist_from_genres(self,prompt):
+        genres = self.get_genres(prompt)
+        print("Selected genres:", genres)    
+        playlists = list(map(self.get_intro_playlist, genres))
 
+        for i in playlists:
+            if i:
+                print(i['external_urls']['spotify'])
+
+        return 1
+
+        track_ids = []
+        for playlist in playlists:
+            results = self.sp.playlist_items(playlist['id'])
+            for ind in range(min(10,len(results['items']))):
+                track = results['items'][ind]['track']
+                track_ids.append(track['id'])
+
+        for i in track_ids:
+            print(i)
 
 a = SpotifyInterface()
+a.create_playlist("chill summer vibes")
