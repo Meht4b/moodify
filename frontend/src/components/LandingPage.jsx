@@ -17,7 +17,7 @@ const LandingPage = () => {
         </div>
 
         <div className="landing-page-cta std-box">
-            <button className='std-box'><h2>Get Started</h2></button>
+            <button className='std-box'><h1>Get Started</h1></button>
         </div>
         <div className='landing-page-grid'></div>
         <div className='landing-page-grid-mask'></div>
