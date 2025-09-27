@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import '../styles/Dashboard.css'
 import PlaybackControls from './PlaybackControls.jsx';
 import Header from './Header.jsx'
+import Playlist from './Playlist.jsx';
+import PlaylistGenerator from './PlaylistGenerator.jsx';
 
 function Dashboard() {
   const [searchParams] = useSearchParams();
@@ -23,6 +25,8 @@ function Dashboard() {
   return (
     <div className='dashboard-container'>
         <Header/>
+        <PlaylistGenerator/>
+        <Playlist/>
         <PlaybackControls accessToken={localStorage.getItem("access_token")} />
     </div>
 

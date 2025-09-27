@@ -113,7 +113,8 @@ return (
             <img
                 src={PauseIcon}
                 alt="Pause"
-                className={`playback-icon pause-icon ${isPlaying ? "fade-in" : "fade-out"}`}
+                className={`playback-icon pause-icon ${isPlaying ? "fade-in" : "fade-out"}`
+              }
             />
         </button>
         <button className="playback-skip-btn" onClick={nextTrack}>

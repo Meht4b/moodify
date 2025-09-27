@@ -1,0 +1,35 @@
+.playlist-generator-container{
+    display: flex;
+    flex-direction: column;
+    width: clamp(200px,80vw,700px);
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 0.5;
+    gap: 10px;
+}
+
+.playlist-generator-container textarea{
+    flex-grow: 1;
+    width: 100%;
+    font-size: large;
+}
+
+.playlist-generator-container textarea:focus{
+    outline: none;
+}
+
+.playlist-generator-container h2{
+    font-weight: 500;
+}
+
+.playlist-generator-container button{
+    padding: 10px;
+}
+
+.playlist-generator-container button::before{
+    display: none;
+}
+
+.playlist-generator-container button::after{
+    display: none;
+}
