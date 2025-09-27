@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import '../styles/App.css'
-import LandingPage from './LandingPage.jsx'
-import Header from './Header.jsx'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './Dashboard.jsx'; // the post-login component
+import LandingPage from './LandingPage.jsx';
 
 function App() {
-
-
   return (
-    <>
-    <Header />
-    <LandingPage />
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

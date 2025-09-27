@@ -2,6 +2,11 @@ import React from 'react'
 import '../styles/LandingPage.css'
 
 const LandingPage = () => {
+
+    const handleLogin = () => {
+        window.location.href = 'http://localhost:5000/login'; // Redirect to backend login route
+    }
+
   return (
     <>  
     <div className='landing-page-container'>
@@ -17,7 +22,7 @@ const LandingPage = () => {
         </div>
 
         <div className="landing-page-cta std-box">
-            <button className='std-box'><h1>Get Started</h1></button>
+            <button className='std-box' onClick={handleLogin}><h1>Get Started</h1></button>
         </div>
         <div className='landing-page-grid'></div>
         <div className='landing-page-grid-mask'></div>
