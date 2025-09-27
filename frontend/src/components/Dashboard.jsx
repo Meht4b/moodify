@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import PlaybackControls from './PlaybackControls.jsx';
 
 function Dashboard() {
   const [searchParams] = useSearchParams();
@@ -17,7 +18,10 @@ function Dashboard() {
     console.log("Access token:", accessToken);
   }, []);
 
-  return <div>Welcome to the Dashboard!</div>;
+  return <div>
+      <h1>Spotify Dashboard</h1>
+      <PlaybackControls accessToken={localStorage.getItem("access_token")} />
+    </div>;
 }
 
 export default Dashboard;
