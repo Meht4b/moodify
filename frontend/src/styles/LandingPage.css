@@ -37,7 +37,7 @@
     width: 110%;
     height: 110%;
     top: 0;
-    background-color: #FEFFAE; 
+    background-color: hsl(61, 100%, 78%); 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) ;
@@ -59,7 +59,7 @@
     transform: translate(-50%, -50%) ;
 
     border: inherit;
-    background-color: #FFFFE4;
+    background-color: hsl(61, 100%, 90%);
     z-index: -2;
 }
 
@@ -177,8 +177,8 @@
 }
 
 .landing-page-red-box{
-    width: 200px;
-    height: 200px;
+    width: clamp(200px,20vw,300px);
+    height: clamp(200px,20vw,300px);
     bottom:0px;
     left: 0px;
 }
@@ -192,8 +192,8 @@
 }
 
 .landing-page-purple-box{
-    width: 200px;
-    height: 200px;
+    width: clamp(200px,20vw,300px);
+    height: clamp(200px,20vw,300px);
     top: -10px;
     border-top: none;
     right: 0px;
