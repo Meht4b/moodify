@@ -1,7 +1,46 @@
 import React, { useEffect, useState } from "react";
+import "../styles/PlaybackControls.css";
+import PlayIcon from "../assets/play.png";
+import PauseIcon from "../assets/stop.png";
+import PrevIcon from "../assets/prev.png";
+import NextIcon from "../assets/next.png";
+
 
 function PlaybackToggle({ accessToken }) {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const nextTrack = async () => {
+  const res = await fetch('https://api.spotify.com/v1/me/player/next', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (res.status === 204) {
+    console.log("Skipped to next track");
+  } else {
+    const errorText = await res.text();
+    console.error("Failed to skip to next track:", errorText);
+  }
+};
+
+const previousTrack = async () => {
+  const res = await fetch('https://api.spotify.com/v1/me/player/previous', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (res.status === 204) {
+    console.log("Went back to previous track");
+  } else {
+    const errorText = await res.text();
+    console.error("Failed to go to previous track:", errorText);
+  }
+};
+
 
   const headers = {
     Authorization: `Bearer ${accessToken}`,
@@ -59,11 +98,30 @@ function PlaybackToggle({ accessToken }) {
     }
   }, [accessToken]);
 
-  return (
-    <button onClick={togglePlayback}>
-      {isPlaying ? "⏸️ Pause" : "▶️ Play"}
-    </button>
-  );
+return (
+    <>
+    <div className="std-box playback-controls-container">
+        <button className="playback-skip-btn" onClick={previousTrack}>
+            <img src={PrevIcon} alt="" />
+        </button>
+        <button onClick={togglePlayback} className="playback-toggle-btn">
+            <img
+                src={PlayIcon}
+                alt="Play"
+                className={`playback-icon play-icon ${isPlaying ? "fade-out" : "fade-in"}`}
+            />
+            <img
+                src={PauseIcon}
+                alt="Pause"
+                className={`playback-icon pause-icon ${isPlaying ? "fade-in" : "fade-out"}`}
+            />
+        </button>
+        <button className="playback-skip-btn" onClick={nextTrack}>
+            <img src={NextIcon} alt="" />
+        </button>
+    </div>
+    </>
+);
 }
 
 export default PlaybackToggle;

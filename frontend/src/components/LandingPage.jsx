@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/LandingPage.css'
+import Header from './Header'
 
 const LandingPage = () => {
 
@@ -9,6 +10,7 @@ const LandingPage = () => {
 
   return (
     <>  
+    <Header/>
     <div className='landing-page-container'>
         <div className="landing-page-content-container">
             <div className='landing-page-content std-box'>

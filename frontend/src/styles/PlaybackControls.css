@@ -1,0 +1,62 @@
+.playback-controls-container{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: clamp(150px,30vw,300px);
+}
+
+.playback-controls-container::after{
+    background-color: hsl(0, 0%, 98%);
+}
+.playback-controls-container::before{
+    background-color: hsl(0, 0%, 100%);
+}
+.playback-controls-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+
+
+.playback-controls-container button:hover{
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.playback-toggle-btn {
+  position: relative;
+  border: none;
+  width: 38px;
+    height: 38px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.playback-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.2s ease;
+  pointer-events: none; 
+  user-select: none;
+}
+
+.playback-controls-container .fade-in {
+  opacity: 1;
+  z-index: 2;
+}
+
+.playback-controls-container .fade-out {
+  opacity: 0;
+  z-index: 1;
+}
