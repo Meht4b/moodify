@@ -6,6 +6,7 @@ import bcrypt
 import requests
 import base64
 from urllib.parse import urlencode
+import SpotifyInterface
 
 @app.route('/login')
 def login():
@@ -45,6 +46,21 @@ def callback():
     })
 
     return redirect(f"{spotify_creds['frontend_redirect_uri']}?{query_params}")
+
+@app.route('/create_playlist',methods=['POST'])
+def create_playlist():
+    try:
+        data = request.get_json()
+        
+        instance = SpotifyInterface.SpotifyInterface(data.get('access_token'),data.get("refresh_token"))
+        genres = instance.get_genres(data.get("prompt"))
+
+        ret = SpotifyInterface.create_mixed_playlist(data.get("access_token"),genres,data.get("prompt"))
+
+        return jsonify({"data":ret})
+    except Exception as e:
+        print(e)
+        return 400
 
 if __name__ == "__main__":
     with app.app_context():
