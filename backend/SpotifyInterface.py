@@ -29,16 +29,12 @@ class SpotifyInterface:
         {genres_text}
 
         Select exactly 5 genres that best match this mood: "{prompt}"
-
-        Output only a valid JSON array of genres, for example:
-        ["acoustic", "lo-fi", "folk", "indie", "singer-songwriter"]
+        Output only a comma seperated list of genres, for example make sure the complete word is there and no letter is deleted:
+        acoustic, lo-fi, folk, indie, singer-songwriter
         """
-        response = self.geminiClient.models.generate_content(model="gemini-2.5-flash", contents=text)
-        genres_json = response.text.split('\n')
+        response = self.geminiClient.models.generate_content(model="gemini-2.5-flash", contents=text).text
 
-        genres_list = json.loads(genres_json[1])
-
-        return genres_list
+        return response.split(',') 
 
     
     def get_intro_playlist(self,genre):
@@ -71,17 +67,9 @@ def create_mixed_playlist(access_token,genres, playlist_name="Moodify Mix"):
 
     for genre in genres:
         # find intro playlist
-        playlist_name_query = "the sound of " + genre.title()
-        search_url = f"{base_url}/search"
-        params = {"q": f"playlist:{playlist_name_query}", "type": "playlist", "limit": 20}
-        results = requests.get(search_url, headers=headers, params=params).json()
-
-        playlist_id = None
-        for i in results.get("playlists", {}).get("items", []):
-            if i and i['owner']['id'] == 'thesoundsofspotify':
-                playlist_id = i['id']
-                break
-
+        playlist_link = genreScraper.get_intro_playlist(genre)
+        # extract playlist id from the playlist link
+        playlist_id = playlist_link.split('/')[-1]
         if not playlist_id:
             continue
 
@@ -110,6 +98,3 @@ def create_mixed_playlist(access_token,genres, playlist_name="Moodify Mix"):
     return new_playlist['external_urls']['spotify']
 
 
-
-a= SpotifyInterface()
-print(a.get_genres('happy'))

@@ -26,7 +26,6 @@ function Dashboard() {
     <div className='dashboard-container'>
         <Header/>
         <PlaylistGenerator/>
-        <Playlist/>
         <PlaybackControls accessToken={localStorage.getItem("access_token")} />
     </div>
 
