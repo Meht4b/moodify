@@ -13,7 +13,19 @@ client_id = os.getenv('SPOTIPY_CLIENT_ID')
 client_secret = os.getenv('SPOTIPY_CLIENT_SECRET')
 backend_redirect_uri = os.getenv('BACKEND_REDIRECT_URI')
 frontend_redirect_uri = os.getenv('FRONTEND_REDIRECT_URI')
-scope = "user-read-playback-state user-modify-playback-state playlist-modify-public"
+scope = (
+    "user-read-playback-state "
+    "user-modify-playback-state "
+    "playlist-modify-public "
+    "user-library-read "
+    "user-library-modify "
+    "playlist-modify-private "
+    "playlist-read-collaborative "
+    "playlist-read-private "
+    "user-read-currently-playing "
+    "user-read-recently-played"
+)
+
 
 spotify_creds = {
     "client_id": client_id,

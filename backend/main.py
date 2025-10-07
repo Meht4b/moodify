@@ -51,7 +51,7 @@ def callback():
 def create_playlist():
     try:
         data = request.get_json()
-        instance = SpotifyInterface.SpotifyInterface()
+        instance = SpotifyInterface.SpotifyInterface(data.get("access_token"))
         genres = instance.get_genres(data.get("prompt"))
 
         ret = SpotifyInterface.create_mixed_playlist(data.get("access_token"),genres,data.get("prompt"))
